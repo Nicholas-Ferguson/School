@@ -22,5 +22,6 @@ RUN pip3 install --upgrade pip; \
     ansible-galaxy collection install juniper.device; \
     ansible-galaxy collection install f5networks.f5_modules; \
     git config --global user.name "Nicholas-Ferguson"; \
-    git config --global user.email nferguson14@gmail.com; \
+    git config --global user.email nferguson14@gmail.com;
+
 WORKDIR /work
