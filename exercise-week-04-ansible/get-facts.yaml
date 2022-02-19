@@ -1,0 +1,13 @@
+---
+- name:  Display Cisco info
+  hosts: cisco
+  gather_facts: no
+
+  tasks:
+    - name: Display Cisco Info
+      cisco.ios.ios_facts:
+        gather_subset: all
+
+    - name: Display Model number 
+      debug:
+        msg: "The IOS model is {{ansible_net_model}}"

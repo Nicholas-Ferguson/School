@@ -1,0 +1,9 @@
+---
+all:
+  hosts:
+  children:
+      switches:
+        hosts:
+          sw1:
+          sw2:
+  vars
