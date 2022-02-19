@@ -1,0 +1,17 @@
+---
+
+- name: Configure sw1
+  hosts: sw1
+  gather_facts: no
+  tasks:
+    - name: Configure sw1 Hostname
+      cisco.ios.ios_system:
+        hostname: switch1
+
+- name: Configure sw2
+  hosts: sw2
+  gather_facts: no
+  tasks:
+    - name: Configure sw2 Hostname
+      cisco.ios.ios_system:
+        hostname: switch2

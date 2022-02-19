@@ -18,3 +18,4 @@ ansible_connection=network_cli
 sw1
 sw2
 
+host ansible_host=192.168.100.128
