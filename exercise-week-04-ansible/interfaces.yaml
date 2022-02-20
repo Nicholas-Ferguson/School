@@ -7,16 +7,23 @@
     - name: Configure sw1 GigabitEthernet2
       cisco.ios.ios_config:
         lines:
-        - description test interface
-        - ip address 10.10.10.12 255.255.255.0
+        - description GigabitEthernet2
+        - ip address 10.10.10.9 255.255.255.252
         parents: interface GigabitEthernet2
     
     - name: Configure sw1 GigabitEthernet3
       cisco.ios.ios_config:
         lines:
-        - description test interface
-        - ip address 10.10.10.13 255.255.255.0
+        - description GigabitEthernet3
+        - ip address 10.10.10.13 255.255.255.252
         parents: interface GigabitEthernet3
+
+    - name: Configure sw1 Loopback0
+      cisco.ios.ios_config:
+        lines:
+        - description Loopback0
+        - ip address 1.1.1.1 255.255.255.255
+        parents: interface Loopback0
 
 - name: Configure sw2 IPv4
   hosts: sw2
@@ -25,13 +32,20 @@
     - name: Configure sw2 GigabitEthernet2
       cisco.ios.ios_config:
         lines:
-        - description test interface
-        - ip address 10.10.10.22 255.255.255.0
+        - description GigabitEthernet2
+        - ip address 10.10.10.10 255.255.255.252
         parents: interface GigabitEthernet2
     
     - name: Configure sw2 GigabitEthernet3
       cisco.ios.ios_config:
         lines:
-        - description test interface
-        - ip address 10.10.10.23 255.255.255.0
+        - description GigabitEthernet3
+        - ip address 10.10.10.14 255.255.255.252
         parents: interface GigabitEthernet3
+
+    - name: Configure sw2 Loopback0
+      cisco.ios.ios_config:
+        lines:
+        - description Loopback0
+        - ip address 2.2.2.2 255.255.255.255
+        parents: interface Loopback0

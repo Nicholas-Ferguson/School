@@ -1,0 +1,13 @@
+---
+
+- hosts: cisco
+  gather_facts: no
+  tasks:
+    - name: Configure Cisco NTP
+      cisco.ios.ios_ntp:
+        server: 8.8.8.8
+        logging: false
+        state: present
+
+
+

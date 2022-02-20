@@ -1,0 +1,11 @@
+---
+
+- hosts: cisco
+  gather_facts: no
+  tasks:
+    - name: Configure Cisco host logging
+      cisco.ios.ios_logging:
+        dest: host
+        name: 192.168.100.128
+        state: present
+ 

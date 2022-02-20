@@ -1,0 +1,11 @@
+---
+
+- hosts: cisco
+  gather_facts: no
+  tasks:
+    - name: Configure Cisco login banner
+      cisco.ios.ios_banner:
+        banner: login
+        text: |
+          Login banner added with ansible!
+        state: present

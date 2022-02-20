@@ -1,0 +1,11 @@
+---
+
+- hosts: cisco
+  gather_facts: no
+  tasks:
+    - name: Configure Cisco name servers
+      cisco.ios.ios_system:
+        name_servers:
+        - 8.8.8.8
+        - 8.8.4.4
+
