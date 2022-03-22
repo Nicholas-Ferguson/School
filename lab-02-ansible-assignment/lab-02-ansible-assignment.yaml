@@ -1,0 +1,38 @@
+---
+# output to localhost for a direct output message while running playbook
+- hosts: localhost
+# assigning variables to use in this playbook
+  vars: 
+    my_name: Nicholas Ferguson
+    my_sid: 991142920
+  tasks:
+    - debug:
+# output message using the variables defined in this playbook
+        msg: "Lab 02 Ansible completed by {{ my_name }}, student ID {{ my_sid }}"
+
+# running multiple playbooks from one playbook, can be used to run multiple playbooks or can run each playbook individually from command line
+- name: Set Hostnames
+  include: hostname.yaml
+
+
+- name: Set Interfaces
+  include: interfaces.yaml
+
+- name: Set OSPF
+  include: ospf.yaml
+
+- name: Set BGP
+  include: bgp.yaml
+
+- name: Set Login Banner
+  include: banner.yaml
+
+# write memory to cisco devices if config has been modified
+- hosts: cisco
+  gather_facts: no
+  tasks: 
+    - name: Write Memory
+      cisco.ios.ios_config:
+        save_when: modified
+
+

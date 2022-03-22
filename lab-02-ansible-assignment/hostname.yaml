@@ -1,0 +1,30 @@
+---
+# specific hosts defined in the inventory file to run this playbook
+- hosts: R1
+  gather_facts: no
+  tasks:
+    - name: Configure R1 Hostname
+# using the cisco system module to config the hostname for each individual router
+      cisco.ios.ios_system:
+        hostname: R1
+
+- hosts: R2
+  gather_facts: no
+  tasks:
+    - name: Configure R2 Hostname
+      cisco.ios.ios_system:
+        hostname: R2
+
+- hosts: R3
+  gather_facts: no
+  tasks:
+    - name: Configure R3 Hostname
+      cisco.ios.ios_system:
+        hostname: R3
+
+- hosts: R4
+  gather_facts: no
+  tasks:
+    - name: Configure R4 Hostname
+      cisco.ios.ios_system:
+        hostname: R4

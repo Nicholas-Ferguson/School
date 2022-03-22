@@ -1,0 +1,19 @@
+---
+# specific hosts defined in the inventory file to run this playbook, can use --limit argument to run against a individual host
+- name: gather information from routers
+  hosts: cisco
+  gather_facts: false
+
+  tasks:
+# using cisco facts module to gather all facts 
+    - name: gather router facts
+      cisco.ios.facts:
+        gather_subset: all
+# copy the running config facts to a cfg file in the current directory
+    - name: Copy running config to file.
+      copy:
+# using the ansible net variable to be saved
+       content: "{{ ansible_net_config }}"
+# saving the content to a local file to be saved or used later
+       dest: $PWD/{{ ansible_net_hostname }}_runningconfig.cfg
+

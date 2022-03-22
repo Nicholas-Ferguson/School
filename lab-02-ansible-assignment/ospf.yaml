@@ -1,0 +1,49 @@
+---
+# specific hosts defined in the inventory file to run this playbook
+- hosts: R1
+  gather_facts: no
+  tasks: 
+    - name: Configure R1 Cisco OSPF
+# use the cisco config module to configure ospf to specific commands, each host is different so i chose to separate each host into individual tasks
+      cisco.ios.ios_config:
+        lines:
+        
+        - network 10.100.100.0 0.0.0.255 area 0
+        - network 1.1.1.1 0.0.0.0 area 0
+        - redistribute bgp 65000 subnets
+        - redistribute connected subnets
+# must use parents: when running commands without a designated module
+        parents: router ospf 1
+
+- hosts: R2
+  gather_facts: no
+  tasks: 
+    - name: Configure R2 Cisco OSPF
+      cisco.ios.ios_config:
+        lines:
+        
+        - network 10.101.101.0 0.0.0.255 area 0
+        - network 2.2.2.2 0.0.0.0 area 0
+        - redistribute bgp 65001 subnets
+        - redistribute connected subnets
+        parents: router ospf 1
+
+- hosts: R3
+  gather_facts: no
+  tasks: 
+    - name: Configure R3 Cisco OSPF
+      cisco.ios.ios_config:
+        lines:
+        - network 10.100.100.0 0.0.0.255 area 0
+        - network 3.3.3.3 0.0.0.0 area 0
+        parents: router ospf 1
+
+- hosts: R4
+  gather_facts: no
+  tasks: 
+    - name: Configure R4 Cisco OSPF
+      cisco.ios.ios_config:
+        lines:
+        - network 10.101.101.0 0.0.0.255 area 0
+        - network 4.4.4.4 0.0.0.0 area 0
+        parents: router ospf 1

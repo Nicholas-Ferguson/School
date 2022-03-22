@@ -1,0 +1,13 @@
+---
+# configure all cisco hosts defined in the inventory file to run this playbook, can use --limit while running command to specify individual hosts
+- hosts: cisco
+  gather_facts: yes
+
+  tasks:
+    - name: Configure Cisco login banner
+# use the cisco banner module to config the banner
+      cisco.ios.ios_banner:
+        banner: login
+# This inputs the banner with text, using predefined ansible_net_ modules to input text from each routers specific variables using gather facts
+        text: "This is router {{ ansible_net_hostname }} with loopback address {{ ansible_net_interfaces.Loopback0.ipv4.0.address }}"
+        state: present

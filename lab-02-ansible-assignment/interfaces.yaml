@@ -1,0 +1,95 @@
+---
+# specific hosts defined in the inventory file to run this playbook
+- name: Configure R1 IPv4
+  hosts: R1
+  gather_facts: no
+  tasks:
+    - name: Configure R1 GigabitEthernet1
+# using the cisco config module to configure the interfaces on each router. each router is different so i decided to separate the tasks to individual host plays
+      cisco.ios.ios_config:
+        lines:
+        - description GigabitEthernet1
+        - ip address 10.200.200.1 255.255.255.0
+        - no shutdown
+# using parent to specify the interface to configure
+        parents: interface g1/0
+    
+    - name: Configure R1 GigabitEthernet2
+      cisco.ios.ios_config:
+        lines:
+        - description GigabitEthernet2
+        - ip address 10.100.100.1 255.255.255.0
+        - no shutdown
+        parents: interface g2/0
+
+    - name: Configure R1 Loopback0
+      cisco.ios.ios_config:
+        lines:
+        - description Loopback0
+        - ip address 1.1.1.1 255.255.255.255
+        parents: interface Lo0
+
+- name: Configure R2 IPv4
+  hosts: R2
+  gather_facts: no
+  tasks:
+    - name: Configure R2 GigabitEthernet1
+      cisco.ios.ios_config:
+        lines:
+        - description GigabitEthernet1
+        - ip address 10.200.200.2 255.255.255.0
+        - no shutdown
+        parents: interface g1/0
+    
+    - name: Configure R2 GigabitEthernet2
+      cisco.ios.ios_config:
+        lines:
+        - description GigabitEthernet2
+        - ip address 10.101.101.1 255.255.255.0
+        - no shutdown
+        parents: interface g2/0
+
+    - name: Configure R2 Loopback0
+      cisco.ios.ios_config:
+        lines:
+        - description Loopback0
+        - ip address 2.2.2.2 255.255.255.255
+        parents: interface Lo0
+
+- name: Configure R3 IPv4
+  hosts: R3
+  gather_facts: no
+  tasks:
+    - name: Configure R3 GigabitEthernet2
+      cisco.ios.ios_config:
+        lines:
+        - description GigabitEthernet2
+        - ip address 10.100.100.2 255.255.255.0
+        - no shutdown
+        parents: interface g2/0
+    
+    - name: Configure R3 Loopback0
+      cisco.ios.ios_config:
+        lines:
+        - description Loopback0
+        - ip address 3.3.3.3 255.255.255.255
+        parents: interface Lo0
+
+- name: Configure R4 IPv4
+  hosts: R4
+  gather_facts: no
+  tasks:
+    - name: Configure R4 GigabitEthernet2
+      cisco.ios.ios_config:
+        lines:
+        - description GigabitEthernet2
+        - ip address 10.101.101.2 255.255.255.0
+        - no shutdown
+        parents: interface g2/0
+    
+    - name: Configure R4 Loopback0
+      cisco.ios.ios_config:
+        lines:
+        - description Loopback0
+        - ip address 4.4.4.4 255.255.255.255
+        parents: interface Lo0

@@ -1,0 +1,37 @@
+---
+- name: gather information from routers
+# specific hosts used in this playbook, can limits specific hosts with --limit arguement
+  hosts: cisco
+  gather_facts: false
+
+  tasks:
+    - name: gather router facts
+# uses cisco ios facts module to gather facts
+      cisco.ios.facts:
+# each variable is unique and displays the output of the specific key
+# for nested variables you have to use dot form to specify the nested variable
+    - name: display version
+      debug:
+        msg: "The IOS version is:{{ ansible_net_version }}"
+
+    - name: display serial number
+      debug:
+        msg: "The serial number is:{{ ansible_net_serialnum }}"
+
+    - name: display model
+      debug:
+        msg: "The model is:{{ ansible_net_model }}"
+    
+    - name: display hostname
+      debug:
+        msg: "The hostname is:{{ ansible_net_hostname }}"
+
+    - name: display all ipv4 address
+      debug:
+        msg: "All running ipv4 address are:{{ ansible_net_all_ipv4_addresses }}"
+
+    - name: display loopback0
+      debug:
+# nest variable displayed
+        msg: "The loopback0 is:{{ ansible_net_interfaces.Loopback0.ipv4.0.address }}"
+

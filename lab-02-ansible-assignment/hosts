@@ -1,0 +1,27 @@
+[all:vars]
+ansible_user=admin
+ansible_password=admin
+ansible_become=yes
+ansible_become_method=enable
+ansible_become_password=adminadmin
+
+[routers:children]
+cisco
+
+[cisco]
+R1 ansible_host=192.168.100.11
+R2 ansible_host=192.168.100.12
+R3 ansible_host=192.168.100.13
+R4 ansible_host=192.168.100.14
+
+[cisco:vars]
+ansible_user=admin
+ansible_network_os=ios
+ansible_connection=network_cli
+
+[dc1]
+R1
+R2
+R3
+R4
+
