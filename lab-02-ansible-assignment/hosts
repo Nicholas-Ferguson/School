@@ -1,3 +1,4 @@
+# all variables used to login and become enable to config routers with passwords and secrets
 [all:vars]
 ansible_user=admin
 ansible_password=admin
@@ -5,20 +6,24 @@ ansible_become=yes
 ansible_become_method=enable
 ansible_become_password=adminadmin
 
+# using the routers group to separate cisco group (if there were different devices)
 [routers:children]
 cisco
 
+# cisco group that defines individual hosts with their corresponding ip
 [cisco]
 R1 ansible_host=192.168.100.11
 R2 ansible_host=192.168.100.12
 R3 ansible_host=192.168.100.13
 R4 ansible_host=192.168.100.14
 
+#variables used for cisco group specifically
 [cisco:vars]
 ansible_user=admin
 ansible_network_os=ios
 ansible_connection=network_cli
 
+# another group defined with just host name
 [dc1]
 R1
 R2
